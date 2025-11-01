@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         {/* Google Site Verification */}
-        <meta name="google-adsense-account" content="ca-pub-1580556331698002">
+        <meta name="google-adsense-account" content="ca-pub-1580556331698002" />
 
         {/* Google AdSense */}
         <script
