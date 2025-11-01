@@ -3,8 +3,8 @@ import formidable from 'formidable'
 import fs from 'fs'
 import pdf from 'pdf-parse'
 import mammoth from 'mammoth'
-import prisma from '../../../lib/prisma'
-import { getEmbedding } from '../../../lib/embeddings'
+import prisma from '../../lib/prisma'
+import { getEmbedding } from '../../lib/embeddings'
 export const config = { api: { bodyParser: false } }
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const form = new formidable.IncomingForm()

@@ -12,17 +12,25 @@ export default function Home() {
     setStream('')
     const es = new EventSource(`/api/chat/stream?prompt=${encodeURIComponent(input)}`)
     es.onmessage = (ev) => {
-      if (ev.data === '[DONE]') { es.close(); return }
+      if (ev.data === '[DONE]') {
+        es.close()
+        return
+      }
       setStream(prev => prev + ev.data)
     }
-    es.onerror = (err) => { console.error(err); es.close() }
+    es.onerror = (err) => {
+      console.error(err)
+      es.close()
+    }
     setInput('')
   }
 
-  // ✅ Load AdSense ad when the component mounts
+  // ✅ TypeScript-safe AdSense
   useEffect(() => {
     try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({})
+      // Extend window type with adsbygoogle
+      (window as any).adsbygoogle = (window as any).adsbygoogle || []
+      ;(window as any).adsbygoogle.push({})
     } catch (err) {
       console.error('AdSense error:', err)
     }
@@ -47,22 +55,25 @@ export default function Home() {
             placeholder="Type your message..."
           />
           <div className="flex gap-2">
-            <button type="submit" className="px-4 py-2 bg-slate-800 text-white">Send (SSE)</button>
-            <a className="px-4 py-2 border" href="/upload">Upload & RAG</a>
+            <button type="submit" className="px-4 py-2 bg-slate-800 text-white">
+              Send (SSE)
+            </button>
+            <a className="px-4 py-2 border" href="/upload">
+              Upload & RAG
+            </a>
           </div>
         </form>
 
-        {/* ✅ Google AdSense banner ad (example placement) */}
+        {/* ✅ Google AdSense banner ad */}
         <div className="my-6">
           <ins
-  className="adsbygoogle"
-  style={{ display: 'block' }}
-  data-ad-client="ca-pub-1580556331698002"
-  data-ad-slot="7400213563"
-  data-ad-format="auto"
-  data-full-width-responsive="true"
-/>
-
+            className="adsbygoogle"
+            style={{ display: 'block' }}
+            data-ad-client="ca-pub-1580556331698002"
+            data-ad-slot="7400213563"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          />
         </div>
 
         <section className="mt-6">
